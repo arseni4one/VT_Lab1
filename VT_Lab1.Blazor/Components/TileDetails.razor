@@ -1,0 +1,27 @@
+﻿@using VT_Lab1.Blazor.Data
+
+@if (Tile != null)
+{
+    <img src="@imageSrc" class="img-thumbnail" width="150" />
+    <div>
+        <p>@Tile.TileName - @Tile.Description</p>
+        <div class="badge badge-info ">@Tile.Size</div>
+    </div>
+}
+@code {
+    [Parameter]
+    public DetailsViewModel Tile { get; set; }
+    //public DetailsViewModel Tile { get; set; }
+
+    [Parameter]
+
+    public EventCallback<DetailsViewModel> TileChanged { get; set; }
+
+    string imageSrc
+    {
+        get
+        {
+            return $"https://localhost:44340/images/{Tile.Image}";
+        }
+    }
+}

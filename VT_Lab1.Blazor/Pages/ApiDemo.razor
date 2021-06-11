@@ -1,0 +1,30 @@
+﻿@page "/apidemo"
+@*inject IHttpClientFactory clientFactory*@
+@inject HttpClient client
+@using VT_Lab1.Blazor.Data
+<div class="container">
+    <TileesList @bind-Tilees="tilees" SelectedObjectChanged="ShowDetails"> </TileesList>
+    <TileDetails @bind-Tiel="SelectedTile"></TileDetails>
+
+</div>
+
+@code {
+    [Parameter]
+    public IEnumerable<ListViewModel> tilees { get; set; }
+
+    string apiBaseAddress = "https://localhost:44340/Api/Tilees";
+    protected override async Task OnInitializedAsync()
+    {
+        tilees = await client.GetFromJsonAsync<IEnumerable<ListViewModel>>(apiBaseAddress);
+    }
+    public DetailsViewModel SelectedTiLe { get; set; }
+    private async Task ShowDetails(int id)
+    {
+        SelectedTiLe =
+    await
+    client.GetFromJsonAsync<DetailsViewModel>(apiBaseAddress + $"/{id}");
+    }
+}
+
+
+

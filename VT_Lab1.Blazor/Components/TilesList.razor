@@ -1,0 +1,37 @@
+﻿
+@using VT_Lab1.Blazor.Data
+<h3>TilesList</h3>
+@if (Tilees == null)
+{
+    <p>Загрузка ...</p>
+}
+else
+{
+    <div class="list-group">
+        @{
+            var i = 1;
+            foreach (var tile in Tilees)
+            {
+                <button type="button" class="list-group-item list-group-item-action @(SelectedId == tile.TileId ? "active" : "")"
+                    @onclick="@(e => Selected(e,tile.TileId))">
+                    @(i++) - @tile.TileName
+                </button>   
+            }
+        }
+    </div>
+}
+@code {
+    [Parameter]
+    public IEnumerable<ListViewModel> Tilees { get; set; }
+    [Parameter]
+    public EventCallback<IEnumerable<ListViewModel>> TileesChanged {get; set;}
+
+    private int SelectedId = 0;
+    [Parameter]
+    public EventCallback<int> SelectedObjectChanged { get; set; }
+    private void Selected(MouseEventArgs e, int id)
+    {
+        SelectedId = id;
+        SelectedObjectChanged.InvokeAsync(id);
+    }
+}

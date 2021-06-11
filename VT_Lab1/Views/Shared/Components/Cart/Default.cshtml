@@ -1,0 +1,56 @@
+﻿@*<a asp-controller="Cart" asp-action="Index"
+       class="navbar-text ml-auto">
+        00,0 руб.(0)
+        <i class="fa fa-shopping-cart nav-color"></i>
+    </a>*@
+
+@model Cart
+
+<a asp-controller="Cart" asp-action="Index" class="navbar-text ml-auto">
+    <i class="fas fa-shopping-cart nav-color"></i> (@Model.Count)
+</a>
+
+<html>
+
+<body>
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+    <!-- Информация пользователя -->
+    @*<a asp-controller="Cart" asp-action="Index" class="navbar-text mlauto">
+        0.0 руб
+        <i class="fas fa-shopping-cart nav-color"></i>
+        (0)
+    </a>*@
+
+    <div class="dropdown ml-5 nav-color">
+
+        <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @*<img src="@Url.Action("GetAvatar", "Image")" width="30" alt="User" class="rounded bg-light" />*@
+
+            @* lb7. 4.2.2 *@
+            <img img-action="GetAvatar" img-controller="Image" width="30" alt="User" class="rounded bg-light" />
+        </div>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item-text">
+                @*<img src="images/User.png" width="50" alt="User" class="rounded" />*@
+
+                @*<img src="@Url.Action("GetAvatar", "Image")" width="30" alt="User" class="rounded" />*@
+
+                @* lb7. 4.2.2 *@
+                <img img-action="GetAvatar" img-controller="Image" width="30" alt="User" class="rounded bg-light" />
+                @User.Identity.Name
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-controller="Product" asp-action="UserProducts">My goods</a>
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log off</a>
+        </div>
+
+    </div>
+    <!-- Информация пользователя - конец -->
+
+</body>
+
+</html>
